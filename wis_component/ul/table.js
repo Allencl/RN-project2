@@ -156,7 +156,7 @@ class TableComponent extends Component {
                   {/* <Text style={styles.rowCellLabel} numberOfLines={3}>大苏打wewe121212是的是的</Text>
                   <Text style={styles.rowCellText} numberOfLines={5}>12121dfd对方对方的fdfdfdfdf反对反对反对反对反对反对</Text> */}
 
-                  <Text style={styles.rowCellLabel} numberOfLines={2}>{o[1]}</Text>
+                  <Text style={styles.rowCellLabel} numberOfLines={2}>{o[1]}:</Text>
                   <Text style={styles.rowCellText} numberOfLines={5}>{item[o[0]]}</Text>
                 </View>)
               })
@@ -359,7 +359,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   pagingIcon:{
-    color:"#003399", 
+    // color:"#003399", 
+    color:"#009966",
     fontSize:28,
     marginRight:6
   },  

@@ -146,14 +146,14 @@ class HomeScreen extends Component{
                 <Card.Body>
                     <View>
                         <View  style={styles.menu_box}>
-                            <TouchableOpacity onPress={() => this.authority('task') }>
+                            <TouchableOpacity onPress={() => this.authority('procurementPlan') }>
                                 <View style={styles.menu_child}>
                                     <Icon style={styles.menu_child_icon} name="flag" size="lg" color="#ff9933" />
                                     <Text style={styles.menu_child_text}>采购计划</Text>
                                 </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => this.authority('task') }>
+                            <TouchableOpacity onPress={() => this.authority('procurementOrder') }>
                                 <View style={styles.menu_child}>
                                     <Icon style={styles.menu_child_icon} name="file-done" size="lg" color="#009966" />
                                     <Text style={styles.menu_child_text}>采购订单</Text>

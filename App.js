@@ -15,7 +15,8 @@ import HomeScreen from './view/Home';    // 主页
 import LoginScreen from './view/Login';   // 登录
 
 import taskScreen from './view/task/index';   // 代办任务
-
+import procurementOrderScreen from './view/procurement/order';   // 采购订单
+import procurementPlanScreen from './view/procurement/plan';   // 采购计划
 
 
 
@@ -34,13 +35,13 @@ const Stack = createStackNavigator();
 class App extends Component {
   constructor (props) {
     super(props)
-    console.log('BASE_URL', Config)
+    // console.log('BASE_URL', Config)
   }
   componentDidMount=async() => {
-    await AsyncStorage.setItem("werks","1031");
-    await AsyncStorage.setItem("lgort","3005");
-    await AsyncStorage.setItem("userName","XX-DENGSL")
-    await AsyncStorage.setItem("bcode","1234qwer")
+    // await AsyncStorage.setItem("werks","1031");
+    // await AsyncStorage.setItem("lgort","3005");
+    // await AsyncStorage.setItem("userName","XX-DENGSL")
+    // await AsyncStorage.setItem("bcode","1234qwer")
   }
 
   openDrawer(){
@@ -99,6 +100,7 @@ class App extends Component {
                 </Tab.Navigator>
               )}
             </Stack.Screen>  
+
             <Stack.Screen name="task" options={{title:'代办任务',...headOption}}>
               {(TabProps) => (
                 <Tab.Navigator tabBar={() => <BarBottom TabProps={TabProps} /> }>
@@ -107,6 +109,21 @@ class App extends Component {
               )}            
             </Stack.Screen>
 
+            <Stack.Screen name="procurementOrder" options={{title:'采购订单',...headOption}}>
+              {(TabProps) => (
+                <Tab.Navigator tabBar={() => <BarBottom TabProps={TabProps} /> }>
+                  <Tab.Screen initialParams={{routeParams: TabProps.route.params}} name="procurementOrder" component={procurementOrderScreen} />
+                </Tab.Navigator>
+              )}            
+            </Stack.Screen>
+
+            <Stack.Screen name="procurementPlan" options={{title:'采购计划',...headOption}}>
+              {(TabProps) => (
+                <Tab.Navigator tabBar={() => <BarBottom TabProps={TabProps} /> }>
+                  <Tab.Screen initialParams={{routeParams: TabProps.route.params}} name="procurementPlan" component={procurementPlanScreen} />
+                </Tab.Navigator>
+              )}            
+            </Stack.Screen>            
 
 
             
