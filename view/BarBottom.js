@@ -57,15 +57,16 @@ class BarBottomPage extends React.Component {
         } 
 
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => this.globalScan() }>
+            {/* <TouchableOpacity onPress={() => this.globalScan() }>
                 <View style={styles.menu_child}>
                     <Icon style={styles.menu_child_icon} name="scan" size="lg" color="#ff9933" />
                 </View>    
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-            {/* <View style={styles.menu_child}>
+            <View style={styles.menu_child}>
 
-            </View> */}
+            </View>
+            
             <TouchableOpacity onPress={() => TabProps.navigation.navigate('Home') }>
                 <View style={styles.menu_child}>
                     <Icon style={styles.menu_child_icon} name="home" size="lg" color="#009966" />
