@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View,Text,  AsyncStorage, ToastAndroid,Button   } from 'react-native';
+import { Dimensions,StyleSheet, ScrollView, View,Text,  AsyncStorage, ToastAndroid,Button   } from 'react-native';
 import { WingBlank, DatePicker, List, Tag, WhiteSpace, Toast,  } from '@ant-design/react-native';
 
 import { createForm, formShape } from 'rc-form';
@@ -49,29 +49,8 @@ class PageForm extends Component {
       }
     });
   }
-  /**
-   * 
-   * @param {} option 
-   */
-  getSelectDataHandle(){
-    let selectData=this.refs.tableRef.getSelectData();  // 选中数据
-  }
 
-  onChange(data){
-    const {navigation} = this.props;
-    let dataList=this.state.dataList;
-    var arr = this.state.dataList.map(function(o) {return o.EQUNR;});
-    let i=arr.indexOf(data);
-    if(i>-1){
-      //跳转 
-      let params ={
-        EQUNR:data
-      }
-      navigation.push('Affirm2',params) 
-    }else{
-      ToastAndroid.show("VIN码不在列表中",ToastAndroid.SHORT);          
-    }
-  }
+
   /**
    * 
    * @param {action,page} option {状态，切换页码}
@@ -101,7 +80,7 @@ class PageForm extends Component {
     let {navigation} = this.props;
 
     return (
-        <View>
+        <View style={{height:Dimensions.get('window').height-131}}>
           <ScrollView style={{paddingTop:0,backgroundColor:"white"}}>
 
               <WisTable 
@@ -124,6 +103,7 @@ class PageForm extends Component {
               {
                 text:"按钮1",
                 onPress:(option)=>{
+                  // let selectData=this.refs.tableRef.getSelectData();  // 选中数据
                   // console.log(option);
                 }
               }
