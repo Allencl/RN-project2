@@ -121,7 +121,7 @@ class HomeScreen extends Component{
             <WingBlank size="md" style={styles.wingBlank}>
             <Card style={styles.card}>
                 <Card.Header
-                title="基础模块"
+                title="任务"
                 thumb={<Icon name="carry-out" size="md" color="#009966" style={{marginRight:6}} />}
                 />
                 <Card.Body>
@@ -140,88 +140,24 @@ class HomeScreen extends Component{
 
             <Card style={styles.card}>
                 <Card.Header
-                title="库内操作"
-                thumb={<Icon name="database" size="md" color="#003399" style={{marginRight:6}} />}
+                title="采购"
+                thumb={<Icon name="carry-out" size="md" color="#009966" style={{marginRight:6}} />}
                 />
                 <Card.Body>
                     <View>
-                        <View style={styles.menu_box}>
-                            <TouchableOpacity onPress={() => this.authority('Binding') }>
+                        <View  style={styles.menu_box}>
+                            <TouchableOpacity onPress={() => this.authority('task') }>
                                 <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="lock" size="lg" color="#009966" />
-                                    <Text style={styles.menu_child_text}>仓位绑定</Text>
+                                    <Icon style={styles.menu_child_icon} name="check-square" size="lg" color="#ff9933" />
+                                    <Text style={styles.menu_child_text}>采购计划</Text>
                                 </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity onPress={() => this.authority('CruiseLibrary') }>
+                            <TouchableOpacity onPress={() => this.authority('task') }>
                                 <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="bulb" size="lg" color="#003399" />
-                                    <Text style={styles.menu_child_text}>巡库</Text>
+                                    <Icon style={styles.menu_child_icon} name="check-square" size="lg" color="#ff9933" />
+                                    <Text style={styles.menu_child_text}>采购订单</Text>
                                 </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this.authority('Status1') }>
-                                <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="thunderbolt" size="lg" color="#ff9933" />
-                                    <Text style={styles.menu_child_text}>电池维护</Text>
-                                </View>  
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this.authority('Inventory1') }>
-                                <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="edit" size="lg" color="#009966" />
-                                    <Text style={styles.menu_child_text}>库内盘点</Text>
-                                </View>    
-                            </TouchableOpacity>
-
-                        </View>                       
-                    </View>         
-                </Card.Body>
-            </Card>
-
-            <Card style={styles.card}>
-                <Card.Header
-                title="出库操作"
-                thumb={<Icon name="coffee" size="md" color="#ff9933" style={{marginRight:6}} />}
-                />
-                <Card.Body>
-                    <View>
-                        <View style={styles.menu_box}>
-                            <TouchableOpacity onPress={() => this.authority('Vehicle1') }>
-                                <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="car" size="lg" color="#003399" />
-                                    <Text style={styles.menu_child_text}>提车</Text>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this.authority('Refue1') }>
-                                <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="environment" size="lg" color="#ff9933" />
-                                    <Text style={styles.menu_child_text}>加油加气</Text>
-                                </View>
-                            </TouchableOpacity>
-
-
-                            
-                            <TouchableOpacity onPress={() => this.authority('Tool1') }>
-                                <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="tool" size="lg" color="#003399" />
-                                    <Text style={styles.menu_child_text}>工具发放</Text>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this.authority('Affirm1') }>
-                                <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="coffee" size="lg" color="#009966" />
-                                    <Text style={styles.menu_child_text}>出厂确认</Text>
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => this.authority('Associate') }>
-                                <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="coffee" size="lg" color="#003399" />
-                                    <Text style={styles.menu_child_text}>交接确认</Text>
-                                </View>    
                             </TouchableOpacity>
 
 
@@ -231,7 +167,8 @@ class HomeScreen extends Component{
             </Card>
 
 
-            <View style={styles.footer}><Text>——到底了——</Text></View>
+
+            {/* <View style={styles.footer}><Text>——到底了——</Text></View> */}
             </WingBlank>
         </ScrollView>
         );
