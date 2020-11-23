@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">大运</string>
+    <string name="app_name_test">大运测试版</string>
+    <string name="app_name_debug">大运开发版</string>
+</resources>
