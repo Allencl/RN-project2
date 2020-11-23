@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View,  AsyncStorage, ToastAndroid,   } from 'react-native';
-import { WingBlank, DatePicker, List, Tag, WhiteSpace, Toast, Button } from '@ant-design/react-native';
+import { StyleSheet, ScrollView, View,Text,  AsyncStorage, ToastAndroid,Button   } from 'react-native';
+import { WingBlank, DatePicker, List, Tag, WhiteSpace, Toast,  } from '@ant-design/react-native';
 
 import { createForm, formShape } from 'rc-form';
 import { WisInput, WisFormHead, WisDatePicker, WisTextarea,WisCamera } from '@wis_component/form';   // form 
-import { WisTable, } from '@wis_component/ul';   // ul 
+import { WisTable,WisButtonFloat } from '@wis_component/ul';   // ul 
 
 
 import WISHttpUtils from '@wis_component/http'; 
@@ -101,21 +101,36 @@ class PageForm extends Component {
     let {navigation} = this.props;
 
     return (
-        <ScrollView style={{paddingTop:0,backgroundColor:"white"}}>
+        <View>
+          <ScrollView style={{paddingTop:0,backgroundColor:"white"}}>
 
-            <WisTable 
-              ref="tableRef"
-              
-              currentPage={1}   // 当前页
-              totalPage={1}       // 总页数
-              columns={this.state.columns} // columns 配置列
-              data={this.state.dataList}  // table 数据
-              onRefresh={()=>{
-                console.log("刷新函数回调，重新拉一下数据！")
-              }}
-            />
+              <WisTable 
+                ref="tableRef"
+                
+                currentPage={1}   // 当前页
+                totalPage={1}       // 总页数
+                columns={this.state.columns} // columns 配置列
+                data={this.state.dataList}  // table 数据
+                onRefresh={()=>{
+                  console.log("刷新函数回调，重新拉一下数据！")
+                }}
+              />
 
-        </ScrollView>
+
+          </ScrollView>
+
+          <WisButtonFloat 
+            children={[
+              {
+                text:"按钮1",
+                onPress:(option)=>{
+                  // console.log(option);
+                }
+              }
+            ]}
+          />                
+
+        </View>
     );
   }
 }
