@@ -122,14 +122,14 @@ class HomeScreen extends Component{
             <Card style={styles.card}>
                 <Card.Header
                 title="任务"
-                thumb={<Icon name="carry-out" size="md" color="#009966" style={{marginRight:6}} />}
+                thumb={<Icon name="bell" size="md" color="#ff9933" style={{marginRight:6}} />}
                 />
                 <Card.Body>
                     <View>
                         <View  style={styles.menu_box}>
                             <TouchableOpacity onPress={() => this.authority('task') }>
                                 <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="check-square" size="lg" color="#ff9933" />
+                                    <Icon style={styles.menu_child_icon} name="bell" size="lg" color="#ff9933" />
                                     <Text style={styles.menu_child_text}>代办任务</Text>
                                 </View>
                             </TouchableOpacity>
@@ -141,21 +141,21 @@ class HomeScreen extends Component{
             <Card style={styles.card}>
                 <Card.Header
                 title="采购"
-                thumb={<Icon name="carry-out" size="md" color="#009966" style={{marginRight:6}} />}
+                thumb={<Icon name="audit" size="md" color="#009966" style={{marginRight:6}} />}
                 />
                 <Card.Body>
                     <View>
                         <View  style={styles.menu_box}>
                             <TouchableOpacity onPress={() => this.authority('task') }>
                                 <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="check-square" size="lg" color="#ff9933" />
+                                    <Icon style={styles.menu_child_icon} name="flag" size="lg" color="#ff9933" />
                                     <Text style={styles.menu_child_text}>采购计划</Text>
                                 </View>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={() => this.authority('task') }>
                                 <View style={styles.menu_child}>
-                                    <Icon style={styles.menu_child_icon} name="check-square" size="lg" color="#ff9933" />
+                                    <Icon style={styles.menu_child_icon} name="file-done" size="lg" color="#009966" />
                                     <Text style={styles.menu_child_text}>采购订单</Text>
                                 </View>
                             </TouchableOpacity>

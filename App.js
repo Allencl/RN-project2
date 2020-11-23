@@ -19,43 +19,6 @@ import taskScreen from './view/task/index';   // 代办任务
 
 
 
-
-import StoragePutScreen from './view/storagePut/index';        // 入库操作
-import RejectionScreen from './view/storagePut/rejection';     // 拒收
-
-
-import BindingScreen from './view/warehouseIn/binding';                 // 库内操作 仓位绑定
-import CruiseLibraryScreen from './view/warehouseIn/cruiseLibrary';     // 库内操作 巡库
-import ConventionScreen from './view/warehouseIn/convention';           // 库内操作 巡库 日常巡库
-import ConventionScreen2 from './view/warehouseIn/convention2';           // 库内操作 巡库 日常巡库2
-
-import IssueScreen from './view/warehouseIn/issue';   // 库内操作 巡库问题项1
-import IssueScreen2 from './view/warehouseIn/issue2';   // 库内操作 巡库问题项2
-
-import StatusScreen1 from './view/warehouseIn/status1';   // 库内操作 电池状态维护1
-import StatusScreen2 from './view/warehouseIn/status2';   // 库内操作 电池状态维护2
-import StatusScreen3 from './view/warehouseIn/status3';   // 库内操作 电池状态维护3
-
-import InventoryScreen1 from './view/warehouseIn/inventory1';   // 库内操作 库内盘点1
-import InventoryScreen2 from './view/warehouseIn/inventory2';   // 库内操作 库内盘点2
-
-import VehicleScreen1 from './view/delivery/vehicle1';   // 出库操作 提车1
-import VehicleScreen2 from './view/delivery/vehicle2';   // 出库操作 提车2
-import VehicleScreen3 from './view/delivery/vehicle3';   // 出库操作 提车3
-
-import RefueScreen1 from './view/delivery/refue1';   // 出库操作 加油加气1
-import RefueScreen2 from './view/delivery/refue2';   // 出库操作 加油加气2
-import RefueScreen3 from './view/delivery/refue3';   // 出库操作 加油加气3
-
-import ToolScreen1 from './view/delivery/tool1';   // 出库操作 工具发放出库1
-import ToolScreen2 from './view/delivery/tool2';   // 出库操作 工具发放出库2
-import ToolScreen3 from './view/delivery/tool3';   // 出库操作 工具发放出库3
-import ToolScreen4 from './view/delivery/tool4';   // 出库操作 工具发放出库4
-
-import AffirmScreen1 from './view/delivery/affirm1';   // 出库操作 出厂确认1
-import AffirmScreen2 from './view/delivery/affirm2';   // 出库操作 出厂确认2
-import AssociateScreen from './view/delivery/associate';   // 出库操作 交接确认
-
 import Config from 'react-native-config';
 const base_url=Config.base_url;
 
