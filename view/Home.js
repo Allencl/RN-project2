@@ -73,181 +73,169 @@ class HomeScreen extends Component{
         }).catch(err => console.error('An error occurred',downloadURL));           
     }
 
-    async authority (code){
+
+    /**
+     * 页面跳转
+     * @param {路由名称} code 
+    */
+    authority=(code)=>{
         const {navigation} = this.props;
-        const {codes} =this.state;
-        let params={
-            werks: await AsyncStorage.getItem("werks"),
-            lgort: await AsyncStorage.getItem("lgort"),
-            bname: await AsyncStorage.getItem("userName"),
-            bcode: await AsyncStorage.getItem("bcode"),
-            zcode: codes[code],
-        }
-    navigation.navigate(code)
-        // WISHttpUtils.post("app/user/auth", params, (result) => {
-        //     if(result.data.STATUS==="S"){
-        //       //跳转页面
-        //       navigation.navigate(code)
-        //     }else{
-        //         ToastAndroid.show(result.data.MESSAGE,ToastAndroid.SHORT);
-        //     }
-          
-        //   });
+        navigation.navigate(code);
     }
 
-  render() {
-    const {navigation} = this.props;
-    const {version}=this.state;
+    render() {
+        const {navigation} = this.props;
+        const {version}=this.state;
 
-    return (
-      <ScrollView style={styles.page}>
+        return (
+        <ScrollView style={styles.page}>
 
-        <Modal
-          title="版本更新"
-          transparent
-          onClose={this.onClose}
-          maskClosable
-          visible={this.state.visible}
-          closable
-        //   footer={footerButtons}
-        >
-          <View style={{ paddingVertical: 20 }}>
-              <View style={styles.versionContent}>
-                <Text style={{ fontSize:16 }}>当前版本：</Text>
-                <Text style={{ fontSize:16 }}>1.0.1</Text>
-              </View>
-              <View style={styles.versionContent}>
-                <Text style={{ fontSize:16 }}>更新版本：</Text>
-                <Text style={{ fontSize:16 }}>1.0.3</Text>
-              </View>
+            <Modal
+            title="版本更新"
+            transparent
+            onClose={this.onClose}
+            maskClosable
+            visible={this.state.visible}
+            closable
+            //   footer={footerButtons}
+            >
+            <View style={{ paddingVertical: 20 }}>
+                <View style={styles.versionContent}>
+                    <Text style={{ fontSize:16 }}>当前版本：</Text>
+                    <Text style={{ fontSize:16 }}>1.0.1</Text>
+                </View>
+                <View style={styles.versionContent}>
+                    <Text style={{ fontSize:16 }}>更新版本：</Text>
+                    <Text style={{ fontSize:16 }}>1.0.3</Text>
+                </View>
 
-              <View style={{paddingTop:8}}>
-                <Button type="primary" onPress={this.onDownload}>点击下载安装版</Button>
-              </View>
-          </View>
-          <Button type="ghost" onPress={this.onClose}>取消</Button>
-        </Modal>
-
-
-
-        <WingBlank size="md" style={styles.wingBlank}>
-          <Card style={styles.card}>
-            <Card.Header
-              title="入库操作"
-              thumb={<Icon name="carry-out" size="md" color="#009966" style={{marginRight:6}} />}
-            />
-            <Card.Body>
-                <View>
-                    <View  style={styles.menu_box}>
-                        <TouchableOpacity onPress={() => this.authority('StoragePut') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="check-square" size="lg" color="#ff9933" />
-                                <Text style={styles.menu_child_text}>入库操作</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>                       
-                </View>         
-            </Card.Body>
-          </Card>
-
-          <Card style={styles.card}>
-            <Card.Header
-              title="库内操作"
-              thumb={<Icon name="database" size="md" color="#003399" style={{marginRight:6}} />}
-            />
-            <Card.Body>
-                <View>
-                    <View style={styles.menu_box}>
-                        <TouchableOpacity onPress={() => this.authority('Binding') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="lock" size="lg" color="#009966" />
-                                <Text style={styles.menu_child_text}>仓位绑定</Text>
-                            </View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => this.authority('CruiseLibrary') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="bulb" size="lg" color="#003399" />
-                                <Text style={styles.menu_child_text}>巡库</Text>
-                            </View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => this.authority('Status1') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="thunderbolt" size="lg" color="#ff9933" />
-                                <Text style={styles.menu_child_text}>电池维护</Text>
-                            </View>  
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => this.authority('Inventory1') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="edit" size="lg" color="#009966" />
-                                <Text style={styles.menu_child_text}>库内盘点</Text>
-                            </View>    
-                        </TouchableOpacity>
-
-                    </View>                       
-                </View>         
-            </Card.Body>
-          </Card>
-
-          <Card style={styles.card}>
-            <Card.Header
-              title="出库操作"
-              thumb={<Icon name="coffee" size="md" color="#ff9933" style={{marginRight:6}} />}
-            />
-            <Card.Body>
-                <View>
-                    <View style={styles.menu_box}>
-                        <TouchableOpacity onPress={() => this.authority('Vehicle1') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="car" size="lg" color="#003399" />
-                                <Text style={styles.menu_child_text}>提车</Text>
-                            </View>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => this.authority('Refue1') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="environment" size="lg" color="#ff9933" />
-                                <Text style={styles.menu_child_text}>加油加气</Text>
-                            </View>
-                        </TouchableOpacity>
+                <View style={{paddingTop:8}}>
+                    <Button type="primary" onPress={this.onDownload}>点击下载安装版</Button>
+                </View>
+            </View>
+            <Button type="ghost" onPress={this.onClose}>取消</Button>
+            </Modal>
 
 
-                        
-                        <TouchableOpacity onPress={() => this.authority('Tool1') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="tool" size="lg" color="#003399" />
-                                <Text style={styles.menu_child_text}>工具发放</Text>
-                            </View>
-                        </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => this.authority('Affirm1') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="coffee" size="lg" color="#009966" />
-                                <Text style={styles.menu_child_text}>出厂确认</Text>
-                            </View>
-                        </TouchableOpacity>
+            <WingBlank size="md" style={styles.wingBlank}>
+            <Card style={styles.card}>
+                <Card.Header
+                title="基础模块"
+                thumb={<Icon name="carry-out" size="md" color="#009966" style={{marginRight:6}} />}
+                />
+                <Card.Body>
+                    <View>
+                        <View  style={styles.menu_box}>
+                            <TouchableOpacity onPress={() => this.authority('task') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="check-square" size="lg" color="#ff9933" />
+                                    <Text style={styles.menu_child_text}>代办任务</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>                       
+                    </View>         
+                </Card.Body>
+            </Card>
 
-                        <TouchableOpacity onPress={() => this.authority('Associate') }>
-                            <View style={styles.menu_child}>
-                                <Icon style={styles.menu_child_icon} name="coffee" size="lg" color="#003399" />
-                                <Text style={styles.menu_child_text}>交接确认</Text>
-                            </View>    
-                        </TouchableOpacity>
+            <Card style={styles.card}>
+                <Card.Header
+                title="库内操作"
+                thumb={<Icon name="database" size="md" color="#003399" style={{marginRight:6}} />}
+                />
+                <Card.Body>
+                    <View>
+                        <View style={styles.menu_box}>
+                            <TouchableOpacity onPress={() => this.authority('Binding') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="lock" size="lg" color="#009966" />
+                                    <Text style={styles.menu_child_text}>仓位绑定</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this.authority('CruiseLibrary') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="bulb" size="lg" color="#003399" />
+                                    <Text style={styles.menu_child_text}>巡库</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this.authority('Status1') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="thunderbolt" size="lg" color="#ff9933" />
+                                    <Text style={styles.menu_child_text}>电池维护</Text>
+                                </View>  
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this.authority('Inventory1') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="edit" size="lg" color="#009966" />
+                                    <Text style={styles.menu_child_text}>库内盘点</Text>
+                                </View>    
+                            </TouchableOpacity>
+
+                        </View>                       
+                    </View>         
+                </Card.Body>
+            </Card>
+
+            <Card style={styles.card}>
+                <Card.Header
+                title="出库操作"
+                thumb={<Icon name="coffee" size="md" color="#ff9933" style={{marginRight:6}} />}
+                />
+                <Card.Body>
+                    <View>
+                        <View style={styles.menu_box}>
+                            <TouchableOpacity onPress={() => this.authority('Vehicle1') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="car" size="lg" color="#003399" />
+                                    <Text style={styles.menu_child_text}>提车</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this.authority('Refue1') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="environment" size="lg" color="#ff9933" />
+                                    <Text style={styles.menu_child_text}>加油加气</Text>
+                                </View>
+                            </TouchableOpacity>
 
 
-                    </View>                       
-                </View>         
-            </Card.Body>
-          </Card>
+                            
+                            <TouchableOpacity onPress={() => this.authority('Tool1') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="tool" size="lg" color="#003399" />
+                                    <Text style={styles.menu_child_text}>工具发放</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this.authority('Affirm1') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="coffee" size="lg" color="#009966" />
+                                    <Text style={styles.menu_child_text}>出厂确认</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() => this.authority('Associate') }>
+                                <View style={styles.menu_child}>
+                                    <Icon style={styles.menu_child_icon} name="coffee" size="lg" color="#003399" />
+                                    <Text style={styles.menu_child_text}>交接确认</Text>
+                                </View>    
+                            </TouchableOpacity>
 
 
-          <View style={styles.footer}><Text>——到底了——</Text></View>
-        </WingBlank>
-      </ScrollView>
-    );
-  }
+                        </View>                       
+                    </View>         
+                </Card.Body>
+            </Card>
+
+
+            <View style={styles.footer}><Text>——到底了——</Text></View>
+            </WingBlank>
+        </ScrollView>
+        );
+    }
 }
 
 

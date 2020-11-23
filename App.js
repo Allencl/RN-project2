@@ -14,6 +14,12 @@ import CenterScreen from './view/Center';       // 个人中心
 import HomeScreen from './view/Home';    // 主页
 import LoginScreen from './view/Login';   // 登录
 
+import taskScreen from './view/task/index';   // 代办任务
+
+
+
+
+
 import StoragePutScreen from './view/storagePut/index';        // 入库操作
 import RejectionScreen from './view/storagePut/rejection';     // 拒收
 
@@ -130,6 +136,27 @@ class App extends Component {
                 </Tab.Navigator>
               )}
             </Stack.Screen>  
+            <Stack.Screen name="task" options={{title:'代办任务',...headOption}}>
+              {(TabProps) => (
+                <Tab.Navigator tabBar={() => <BarBottom TabProps={TabProps} /> }>
+                  <Tab.Screen initialParams={{routeParams: TabProps.route.params}} name="task" component={taskScreen} />
+                </Tab.Navigator>
+              )}            
+            </Stack.Screen>
+
+
+
+
+
+
+
+
+
+
+                  
+
+
+
             <Stack.Screen name="StoragePut" options={{title:'入库操作',...headOption}}>
               {(TabProps) => (
                 <Tab.Navigator tabBar={() => <BarBottom TabProps={TabProps} /> }>
