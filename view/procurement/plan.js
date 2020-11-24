@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Dimensions,StyleSheet, ScrollView, View,Text,  AsyncStorage, ToastAndroid,Button   } from 'react-native';
-import { WingBlank, DatePicker, List, Tag, WhiteSpace, Toast,  } from '@ant-design/react-native';
+import { SegmentedControl,WingBlank, DatePicker, List, Tag, WhiteSpace, Toast,  } from '@ant-design/react-native';
 
 import { createForm, formShape } from 'rc-form';
 import { WisInput, WisFormHead, WisDatePicker, WisTextarea,WisCamera } from '@wis_component/form';   // form 
@@ -58,8 +58,13 @@ class PageForm extends Component {
 
     return (
         <View style={{height:Dimensions.get('window').height-131}}>
-          <ScrollView style={{paddingTop:0,backgroundColor:"white"}}>
+          <SegmentedControl 
+            style={{height:50,padding:6,borderColor:'#fff',backgroundColor:'#fff'}}
+            values={['Segment13', 'Segment27']} 
+            tintColor="#13c2c2" 
+          />
 
+          <ScrollView style={{paddingTop:0,backgroundColor:"white"}}>
               <WisTable 
                 ref="tableRef"                
                 currentPage={1}   // 当前页
