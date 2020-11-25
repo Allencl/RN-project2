@@ -1,13 +1,14 @@
 import React,{Component} from 'react';
+import Config from 'react-native-config';
 
 import {
     ToastAndroid,
 } from 'react-native';
 //const base_url="http://182.168.1.19:8088/";
 //const base_url="http://60.222.227.231:10080/sit/";
+// const base_url=Config.base_url;
+const base_url="http://182.168.1.132:9900/";
 
-import Config from 'react-native-config';
-const base_url=Config.base_url;
 /**
  * 网络请求的工具类
  * 方法是静态的 可以直接 WISHttpUtils.post|get
@@ -57,24 +58,38 @@ export default class WISHttpUtils extends Component{
      */
     static post(url,params,callback){
         try {
+
+            // let formdata = new FormData();
+            // formdata.append("lang","zh_CN");
+            // formdata.append("username","admin");
+            // formdata.append("password","1");
+            // formdata.append("j_captcha","NO");
+            // formdata.append("customKey","toName=home");
+
+
+
+            
             fetch(base_url+url,{
-                method:'POST',
-                headers:{
-                  'Content-Type': 'application/json;charset=UTF-8',
-                },
-                body:JSON.stringify(params),//json对象转换为string
+                    method:'POST',
+                    headers:{
+                        'Content-Type': 'application/json;charset=UTF-8',
+                        'Authorization': 'Basic W29iamVjdCBPYmplY3Rd'
+                    },
+                    body:JSON.stringify(params),//json对象转换为string
+                    // body: formdata
                 })
                 .then((response) => {
-                    if(response.ok){
-                        return response.json();
-                    }
+                    console.log(response);
+                    // if(response.ok){
+                    //     return response.json();
+                    // }
                 })
                 .then((json) => {
-                    if(json.success){
-                        callback(json);
-                    }else{
-                        ToastAndroid.show(json.message,ToastAndroid.SHORT);
-                    }
+                    // if(json.success){
+                    //     callback(json);
+                    // }else{
+                    //     ToastAndroid.show(json.message,ToastAndroid.SHORT);
+                    // }
                 })
         } catch (error) {
             console.log(e)

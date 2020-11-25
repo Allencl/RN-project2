@@ -1,10 +1,10 @@
 import React from 'react';
-import { AsyncStorage,TouchableOpacity,ToastAndroid,Text, View, StyleSheet } from 'react-native';
+import { window,TouchableOpacity,ToastAndroid,Text, View, StyleSheet } from 'react-native';
 import { Icon,Button, Provider, InputItem, List, Toast } from '@ant-design/react-native';
 import { createForm, formShape } from 'rc-form';
 
 import WISHttpUtils from '@wis_component/http';   // http 
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class LoginScreenForm extends React.Component {
   constructor(props) {
@@ -39,20 +39,45 @@ class LoginScreenForm extends React.Component {
           Toast.fail('用户名或密码未填！');
         } else{
           const {navigation} = that.props;
-          navigation.navigate('Home');
-          // 保存数据
-          // WISHttpUtils.post("app/user/auth", value, (result) => {
-          //   //可能要存TOKEN
-          //   if(result.data.STATUS==="S"){
-          //     //跳转页面 ===>首页
-          //     this.setAsyncStorage(value)
 
-          //     navigation.navigate('Home')
-          //   }else{
-          //     ToastAndroid.show(result.data.MESSAGE,ToastAndroid.SHORT);         
-          //   }
-          // });
-         
+
+          fetch("http://182.168.1.132:9900/"+"api-uaa/oauth/user/token",{
+            method:'POST',
+            headers:{
+                // 'Content-Type': 'application/json;charset=UTF-8',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Basic d2ViQXBwOndlYkFwcA=='
+            },
+            body: "username=admin&password=1&lang=zh_CN&j_captcha=1&customKey='toName=home'"
+        })
+        .then((response) => {
+            if(response.ok){
+              return response.json();
+            }
+        })
+        .then((json) => {
+            var token=json.data.access_token;
+
+
+            if(json){
+              // 缓存 token
+              AsyncStorage.setItem("_token",token).then(()=>{
+                navigation.navigate('Home');
+              });
+            } else{
+              ToastAndroid.show(json["message"],ToastAndroid.SHORT);
+            }
+
+
+
+
+            AsyncStorage.getItem("_token").then((data)=>{
+              console.log("fanfan 8989");
+              console.log(data);
+
+            });
+        })
+       
         }
     });
   }

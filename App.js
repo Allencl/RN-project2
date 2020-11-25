@@ -83,7 +83,7 @@ class App extends Component {
 
         {/* 菜单 */}
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator initialRouteName="Login">
 
             <Stack.Screen name="Login"
               options={{
