@@ -73,16 +73,24 @@ class PageForm extends Component {
           <ScrollView style={{paddingTop:0,backgroundColor:"white"}}>
 
               <WisTable 
-                ref="tableRef"                
+                ref="tableRef"     
+                checkBox={false}          
                 currentPage={currentPage}   // 当前页
                 totalPage={totalPage}       // 总页数
                 columns={this.state.columns} // columns 配置列
                 data={this.state.dataList}  // table 数据
+                headRightText={(option)=>{
+                  // console.log(option);
+                  return "2012年11月11"
+                }}
                 onChangePage={(option)=>{
                   that.getInitFunc({
                     offset:(option.targetPage-1)*10,
                     currentPage:option["targetPage"]
                   });
+                }}
+                onClickRow={()=>{
+
                 }}
                 onRefresh={()=>{
                   that.getInitFunc();

@@ -118,7 +118,7 @@ class TableComponent extends Component {
    * @param {*} item row
    */
   renderItemHandle(item,index){
-    const {onClickRow,columns={},titleKey,checkBox=true}=this.props;
+    const {onClickRow,columns={},checkBox=true,headRightText}=this.props;
     let {documentWidth}=this.state;
 
 
@@ -127,26 +127,39 @@ class TableComponent extends Component {
           if( onClickRow ) onClickRow(item,index); 
       }}>
         <View style={styles.rowContainer}>
-          <View style={{flexDirection: "row",justifyContent:'space-between',borderBottomWidth:1,borderBottomColor:"#ccc"}}>
-              <View style={styles.checkBoxContainer}>
+          <View style={{height:30,flexDirection: "row",justifyContent:'space-between',borderBottomWidth:1,borderBottomColor:"#ccc"}}>
+              <View style={{...styles.checkBoxContainer,flex:1}}>
                 { checkBox ?
                   <CheckBox
                     value={(item["_checked"]||false)}
                     onValueChange={()=> this.checkBoxChange(item,index)}
                     style={styles.checkbox}
                   />
-                : <View style={{height:32,width:8}}></View>
+                : <View style={{}}></View>
 
                 }
 
-                <Text numberOfLines={1} style={styles.headText}>{ titleKey?item[titleKey]:(index+1) }</Text>
-              </View>
-              <View>
-                { onClickRow ? 
-                    <Icon style={{paddingTop:8,paddingRight:6,fontSize:16,color:"#000"}} name="right" />
+                {
+                  checkBox ?
+                    <View></View>
                     :
-                    <Text> </Text>
+                    <Text style={styles.headText}>{ (index+1) }</Text>
                 }
+                
+              </View>
+              <View style={{flexDirection:"row",flexDirection:'row-reverse',flex:5}}>
+                { onClickRow ? 
+                  <Icon style={{paddingTop:7,paddingRight:6,fontSize:16,color:"#000"}} name="right" />
+                  :
+                  <Text> </Text>
+                }
+
+                { headRightText ?
+                  <Text style={{paddingTop:5,paddingRight:3,textAlign:"right"}}>{ headRightText && headRightText(item) }</Text>
+                  :
+                  <Text></Text>
+                }
+
               </View>
           </View>
 
@@ -291,14 +304,18 @@ const styles = StyleSheet.create({
 
   },
   checkBoxContainer:{
-    flexDirection: "row",
+    // backgroundColor:"red"
+    // flexDirection: "row",
   },
   headText:{
-    paddingTop:5,
-    paddingLeft:2,
+    paddingTop:3,
+    paddingLeft:6,
     fontSize:16,
     fontWeight:"bold",
-    width:260,
+    textAlign:"left",
+    flexDirection: "row",
+
+    // width:260,
     // backgroundColor:"red"
   },
   checkbox:{
