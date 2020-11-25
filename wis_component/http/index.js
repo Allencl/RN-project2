@@ -63,8 +63,7 @@ export default class WISHttpUtils extends Component{
             // 模拟 form 数据提交
             var formData = '';
             Object.entries(option["params"]).map((o)=>formData+='&'+o[0]+'='+String(o[1]));
-            
-            console.log(formData.slice(1));
+
             AsyncStorage.getItem("_token").then((data)=>{
                 fetch(base_url+url,{
                     method:'POST',
@@ -76,10 +75,6 @@ export default class WISHttpUtils extends Component{
                     body: formData.slice(1)
                 })
                 .then((response) => {
-                    console.log(response);
-                    console.log(response.headers);
-                    console.log(response._bodyInit);
-
 
                     // 如果相应码为200 将字符串转换为json对象
                     if(response.ok){

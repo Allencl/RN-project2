@@ -20,9 +20,9 @@ class PageForm extends Component {
       currentPage:1,
       totalPage:1,   
       columns:{
-        id:'序号',
-        EQUNR:'设备号',
-        ZCOLO:'颜色',
+        code:'任务',
+        name:'公司',
+        enName:'供应商',
       },
       dataList:[]
     }
