@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import { Linking,AsyncStorage,ToastAndroid,DeviceEventEmitter,StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Linking,ToastAndroid,DeviceEventEmitter,StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Modal,Card, WhiteSpace, WingBlank, Button, Icon } from '@ant-design/react-native';
 
 import WISHttpUtils from '@wis_component/http';   // http 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 class HomeScreen extends Component{
@@ -89,6 +90,19 @@ class HomeScreen extends Component{
 
         return (
         <ScrollView style={styles.page}>
+            <Button onPress={()=>{
+                WISHttpUtils.post("api-user/dictType/list",{
+                    params:{
+                        rows: 10,
+                        page: 1,
+                        offset: 0,
+                        limit: 10, 
+                    }
+                },(result) => {
+                    console.log('8989 7876');
+                    console.log(result);
+                });
+            }}>default</Button>
 
             <Modal
             title="版本更新"

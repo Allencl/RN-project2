@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import Config from 'react-native-config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import {
     ToastAndroid,
@@ -24,7 +26,7 @@ export default class WISHttpUtils extends Component{
      * @param {*} params  参数
      * @param {*} callback  成功后的回调
      */
-    static get(url,params,callback){
+    static get(url,params,callback){        
        fetch(base_url+url,{
         method:'GET',
         body:params
@@ -51,51 +53,60 @@ export default class WISHttpUtils extends Component{
   
 
     /**
-     * post json形式  header为'Content-Type': 'application/json'
      * @param {*} url 
      * @param {*} params 
      * @param {*} callback 
      */
-    static post(url,params,callback){
+    static post(url,option,callback){
         try {
 
-            // let formdata = new FormData();
-            // formdata.append("lang","zh_CN");
-            // formdata.append("username","admin");
-            // formdata.append("password","1");
-            // formdata.append("j_captcha","NO");
-            // formdata.append("customKey","toName=home");
-
-
-
+            // 模拟 form 数据提交
+            var formData = '';
+            Object.entries(option["params"]).map((o)=>formData+='&'+o[0]+'='+String(o[1]));
             
-            fetch(base_url+url,{
+            console.log(formData.slice(1));
+            AsyncStorage.getItem("_token").then((data)=>{
+                fetch(base_url+url,{
                     method:'POST',
                     headers:{
-                        'Content-Type': 'application/json;charset=UTF-8',
-                        'Authorization': 'Basic W29iamVjdCBPYmplY3Rd'
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': 'Bearer '+data
                     },
-                    body:JSON.stringify(params),//json对象转换为string
-                    // body: formdata
+                    // body: formData
+                    body: formData.slice(1)
                 })
                 .then((response) => {
                     console.log(response);
-                    // if(response.ok){
-                    //     return response.json();
-                    // }
+                    console.log(response.headers);
+                    console.log(response._bodyInit);
+
+
+                    // 如果相应码为200 将字符串转换为json对象
+                    if(response.ok){
+                        return response.json(); 
+                    }                    
                 })
                 .then((json) => {
-                    // if(json.success){
-                    //     callback(json);
-                    // }else{
-                    //     ToastAndroid.show(json.message,ToastAndroid.SHORT);
-                    // }
+
+                    // 提示
+                    if(json && json["message"]){
+                        ToastAndroid.show(json["message"],ToastAndroid.SHORT);
+                    }
+
+                    // 返回数据
+                    if(json){
+                        callback(json);
+                    }
                 })
+                .catch(error => {
+                    // ToastAndroid.show("netword error",ToastAndroid.SHORT);
+                });                
+            });
         } catch (error) {
-            console.log(e)
-            // .catch(error => {
-            //     ToastAndroid.show("netword error",ToastAndroid.SHORT);
-            // });
+            // console.log(e)
+            // // .catch(error => {
+            // //     ToastAndroid.show("netword error",ToastAndroid.SHORT);
+            // // });
         }
         
     };

@@ -4,7 +4,7 @@ import { Icon,Button, Provider, InputItem, List, Toast } from '@ant-design/react
 import { createForm, formShape } from 'rc-form';
 
 import WISHttpUtils from '@wis_component/http';   // http 
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class LoginScreenForm extends React.Component {
   constructor(props) {
@@ -49,34 +49,24 @@ class LoginScreenForm extends React.Component {
                 'Authorization': 'Basic d2ViQXBwOndlYkFwcA=='
             },
             body: "username=admin&password=1&lang=zh_CN&j_captcha=1&customKey='toName=home'"
-        })
-        .then((response) => {
-            if(response.ok){
-              return response.json();
-            }
-        })
-        .then((json) => {
-            var token=json.data.access_token;
+          })
+          .then((response) => {
+              if(response.ok){
+                return response.json();
+              }
+          })
+          .then((json) => {
+              var token=json.data.access_token;
 
-
-            if(json){
-              // 缓存 token
-              AsyncStorage.setItem("_token",token).then(()=>{
-                navigation.navigate('Home');
-              });
-            } else{
-              ToastAndroid.show(json["message"],ToastAndroid.SHORT);
-            }
-
-
-
-
-            AsyncStorage.getItem("_token").then((data)=>{
-              console.log("fanfan 8989");
-              console.log(data);
-
-            });
-        })
+              if(json){
+                // 缓存 token
+                AsyncStorage.setItem("_token",token).then(()=>{
+                  navigation.navigate('Home');
+                });
+              } else{
+                ToastAndroid.show(json["message"],ToastAndroid.SHORT);
+              }
+          })
        
         }
     });

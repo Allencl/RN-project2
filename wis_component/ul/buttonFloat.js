@@ -12,8 +12,8 @@ class ButtonComponent extends Component {
 
     return (
       <View style={{position:'absolute',right:20,bottom:50}}>
-        { children.map(o=>{
-          return <TouchableOpacity onPress={()=> o["onPress"]&&o["onPress"](o) }>
+        { children.map((o,index)=>{
+          return <TouchableOpacity key={String(index)} onPress={()=> o["onPress"]&&o["onPress"](o) }>
             <View style={{...styles.buttonCircle,
               backgroundColor:o['backgroundColor']?o['backgroundColor']:'#13c2c2'
             }}>
