@@ -3,9 +3,7 @@ import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-import {
-    ToastAndroid,
-} from 'react-native';
+import {ToastAndroid} from 'react-native';
 //const base_url="http://182.168.1.19:8088/";
 //const base_url="http://60.222.227.231:10080/sit/";
 // const base_url=Config.base_url;

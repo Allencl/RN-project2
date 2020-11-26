@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, Text, AsyncStorage } from 'react-native';
+import { DeviceEventEmitter,TouchableOpacity, View, Text, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -37,11 +37,9 @@ class App extends Component {
     super(props)
     // console.log('BASE_URL', Config)
   }
+  
   componentDidMount=async() => {
-    // await AsyncStorage.setItem("werks","1031");
-    // await AsyncStorage.setItem("lgort","3005");
-    // await AsyncStorage.setItem("userName","XX-DENGSL")
-    // await AsyncStorage.setItem("bcode","1234qwer")
+
   }
 
   openDrawer(){
@@ -62,7 +60,10 @@ class App extends Component {
         fontWeight: 'bold',
       },
       headerRight: (props) => (
-        <TouchableOpacity onPress={() => this.drawer.openDrawer() }>
+        <TouchableOpacity onPress={() =>{ 
+          this.drawer.openDrawer();
+          DeviceEventEmitter.emit('globalEmitter_get_login_config');
+        }}>
           <View style={{paddingTop:5,paddingRight:20}}><Icon style={{color:"#fff"}} name={"setting"}/></View>
         </TouchableOpacity> ),
 

@@ -22,13 +22,13 @@ class LoginScreenForm extends React.Component {
     let that=this;
 
     // 缓存的 登录信息
-    AsyncStorage.getItem("login_config").then((option)=>{
+    AsyncStorage.getItem("login_message").then((option)=>{
       if(option){
         try{
-          let loginConfig=JSON.parse(option);
+          let loginMessage=JSON.parse(option);
           that.setState({
-            userName:loginConfig["userName"],
-            password:loginConfig["password"],
+            userName:loginMessage["userName"],
+            password:loginMessage["password"],
           });
         } catch (error) {
 
@@ -36,9 +36,6 @@ class LoginScreenForm extends React.Component {
       }
     });
   }
-
-
-
 
 
   /**
@@ -78,26 +75,52 @@ class LoginScreenForm extends React.Component {
 
               if(json){
 
-                // 缓存 登录信息
+                that.getUserData(json.data);
+ 
                 try{
-                  AsyncStorage.setItem("login_config",JSON.stringify({
+                  // 缓存 登录信息
+                  AsyncStorage.setItem("login_message",JSON.stringify({
                     userName:newUserName,
                     password:newPassword,
                   }));
+
+                  // 缓存 token
+                  AsyncStorage.setItem("_token",token).then(()=>{
+                    navigation.navigate('Home');
+                  });
+
                 } catch (error) {
 
                 }             
 
-                // 缓存 token
-                AsyncStorage.setItem("_token",token).then(()=>{
-                  navigation.navigate('Home');
-                });
               } else{
                 ToastAndroid.show(json["message"],ToastAndroid.SHORT);
               }
           })
        
         }
+    });
+  }
+
+
+  /**
+   * 获取 用户数据
+   */
+  getUserData=(option={})=>{
+    WISHttpUtils.post("api-user/main",{
+      params:{
+        userId: option["id"]
+      }
+    },(result) => {
+
+      if(result){
+        try{
+          // 缓存 登录数据
+          AsyncStorage.setItem("login_config",JSON.stringify(result.data));
+        } catch (error) {
+        } 
+      }
+      
     });
   }
 

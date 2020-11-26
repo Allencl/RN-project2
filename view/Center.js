@@ -2,19 +2,49 @@ import React from 'react';
 import { DeviceEventEmitter,TouchableOpacity, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, Provider, InputItem, List, Toast,Icon } from '@ant-design/react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class CenterPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      name:"",
+      position:"",
+      email:'',
     };
   }
 
+  componentDidMount() {
+    let that=this;
 
+    // 获取登录信息
+    this.listener =DeviceEventEmitter.addListener('globalEmitter_get_login_config',function(){
+      // 缓存的 登录数据
+      AsyncStorage.getItem("login_config").then((option)=>{
+        if(option){
+          try{
+            let loginConfig=JSON.parse(option);
+
+            that.setState({
+              name:loginConfig["userName"],
+              position:loginConfig["phone"],
+              // email:loginConfig["phone"],
+            });
+
+          } catch (error) {
+          }          
+        }
+      });
+    });
+  }
+
+  componentWillUnmount(){
+    this.listener.remove();
+  }
 
   render() {
     const {onClose} = this.props;
+    let {name,position,email}=this.state;
 
     return (
       <View styl={styles.container}>
@@ -27,13 +57,13 @@ class CenterPage extends React.Component {
             </View>
             <View style={styles.textBox}>
               <View style={{...styles.textDIV,paddingTop:26}}>
-                <Text style={{fontSize:20,color:"#fff"}}>李某某</Text> 
+                <Text style={{fontSize:20,color:"#fff"}}>{name}</Text> 
               </View>   
               <View style={styles.textDIV}>
-                <Text style={{fontSize:18,color:"#fff"}}>部门经理</Text> 
+                <Text style={{fontSize:18,color:"#fff"}}>{position}</Text> 
               </View>   
               <View style={styles.textDIV}>
-                <Text style={{fontSize:18,color:"#fff"}}>dsdsdsd@qq.com</Text> 
+                <Text style={{fontSize:18,color:"#fff"}}>{email}</Text> 
               </View>   
             </View>
           </View>
