@@ -90,19 +90,7 @@ class HomeScreen extends Component{
 
         return (
         <ScrollView style={styles.page}>
-            <Button onPress={()=>{
-                WISHttpUtils.post("api-user/dictType/list",{
-                    params:{
-                        rows: 10,
-                        page: 1,
-                        offset: 0,
-                        limit: 10, 
-                    }
-                },(result) => {
-                    console.log('8989 7876');
-                    console.log(result);
-                });
-            }}>default</Button>
+
 
             <Modal
             title="版本更新"

@@ -30,27 +30,27 @@ export default class WISHttpUtils extends Component{
      * @param {*} callback  成功后的回调
      */
     static get(url,params,callback){        
-       fetch(origin+url,{
-        method:'GET',
-        body:params
-        })
-        .then((response) => {
-            if(response.ok){//如果相应码为200
-                return response.json(); //将字符串转换为json对象
-            }
-        })
-        .then((json) => {
-            //根据接口规范在此判断是否成功，成功后则回调
-            if(json.success){
-                callback(json);
-            }else{
-                //否则不正确，则进行消息提示
-                //ToastAndroid 只针对安卓平台，并不跨平台
-                ToastAndroid.show(json.message,ToastAndroid.SHORT);
-            }
-        }).catch(error => {
-            ToastAndroid.show("netword error",ToastAndroid.SHORT);
-        });
+    //    fetch(origin+url,{
+    //     method:'GET',
+    //     body:params
+    //     })
+    //     .then((response) => {
+    //         if(response.ok){//如果相应码为200
+    //             return response.json(); //将字符串转换为json对象
+    //         }
+    //     })
+    //     .then((json) => {
+    //         //根据接口规范在此判断是否成功，成功后则回调
+    //         if(json.success){
+    //             callback(json);
+    //         }else{
+    //             //否则不正确，则进行消息提示
+    //             //ToastAndroid 只针对安卓平台，并不跨平台
+    //             ToastAndroid.show(json.message,ToastAndroid.SHORT);
+    //         }
+    //     }).catch(error => {
+    //         ToastAndroid.show("netword error",ToastAndroid.SHORT);
+    //     });
     };
 
   
@@ -85,14 +85,14 @@ export default class WISHttpUtils extends Component{
                     body: formData.slice(1)
                 })
                 .then((response) => {
-                    // console.log(response);
+                    console.log(response);
                     // 如果相应码为200 将字符串转换为json对象
                     if(response.ok){
                         return response.json(); 
                     }                    
                 })
                 .then((json) => {
-
+                    console.log(json);
                     // 关闭 loding
                     DeviceEventEmitter.emit('globalEmitter_toggle_loding',false);
 
