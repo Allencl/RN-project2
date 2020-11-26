@@ -40,7 +40,6 @@ class PageForm extends Component {
 
     let that=this;
 
-    console.log(option);
     WISHttpUtils.post("api-user/dictType/list",{
       params:{
         rows: 10,
@@ -79,10 +78,10 @@ class PageForm extends Component {
                 totalPage={totalPage}       // 总页数
                 columns={this.state.columns} // columns 配置列
                 data={this.state.dataList}  // table 数据
-                headRightText={(option)=>{
-                  // console.log(option);
-                  return "2012年11月11"
-                }}
+                // headRightText={(option)=>{
+                //   // console.log(option);
+                //   return "2012年11月11";
+                // }}
                 onChangePage={(option)=>{
                   that.getInitFunc({
                     offset:(option.targetPage-1)*10,

@@ -13,13 +13,28 @@ class LoginScreenForm extends React.Component {
     this.state = {
       toggleEye:true,  // 显示密码
 
-      userName:"XX-DENGSL",
-      password:"1QAZ2wsx",
+      userName:"",
+      password:"",
     };
   }
 
   componentDidMount() {
+    let that=this;
 
+    // 缓存的 登录信息
+    AsyncStorage.getItem("login_config").then((option)=>{
+      if(option){
+        try{
+          let loginConfig=JSON.parse(option);
+          that.setState({
+            userName:loginConfig["userName"],
+            password:loginConfig["password"],
+          });
+        } catch (error) {
+
+        }          
+      }
+    });
   }
 
 
@@ -39,8 +54,11 @@ class LoginScreenForm extends React.Component {
           Toast.fail('用户名或密码未填！');
         } else{
           const {navigation} = that.props;
+          let newUserName=value["userName"].trim();
+          let newPassword=value["password"].trim();
 
 
+          // return;
           fetch("http://182.168.1.132:9900/"+"api-uaa/oauth/user/token",{
             method:'POST',
             headers:{
@@ -48,7 +66,7 @@ class LoginScreenForm extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'Basic d2ViQXBwOndlYkFwcA=='
             },
-            body: "username=admin&password=1&lang=zh_CN&j_captcha=1&customKey='toName=home'"
+            body: "username="+newUserName+"&password="+newPassword+"&lang=zh_CN&j_captcha=1&customKey='toName=home'"
           })
           .then((response) => {
               if(response.ok){
@@ -59,6 +77,17 @@ class LoginScreenForm extends React.Component {
               var token=json.data.access_token;
 
               if(json){
+
+                // 缓存 登录信息
+                try{
+                  AsyncStorage.setItem("login_config",JSON.stringify({
+                    userName:newUserName,
+                    password:newPassword,
+                  }));
+                } catch (error) {
+
+                }             
+
                 // 缓存 token
                 AsyncStorage.setItem("_token",token).then(()=>{
                   navigation.navigate('Home');
@@ -135,7 +164,7 @@ class LoginScreenForm extends React.Component {
                   onPress={this.submit}
                   // type="primary"
                 >
-                  <Text style={{fontSize:22,color:"#fff"}}>登录</Text>
+                  <Text style={{fontSize:22,color:"#fff"}}>登 录</Text>
                 </Button>
               </List.Item>
           </List>
