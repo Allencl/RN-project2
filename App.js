@@ -15,8 +15,8 @@ import HomeScreen from './view/Home';    // 主页
 import LoginScreen from './view/Login';   // 登录
 
 import taskScreen from './view/task/index';   // 代办任务
-import procurementOrderScreen from './view/procurement/order';   // 采购订单
-import procurementPlanScreen from './view/procurement/plan';   // 采购计划
+import procurementOrderScreen from './view/procurementOrder/index';   // 采购订单
+import procurementPlanScreen from './view/procurementPlan/index';     // 采购计划
 
 
 

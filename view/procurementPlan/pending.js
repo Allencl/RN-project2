@@ -99,17 +99,17 @@ class PageForm extends Component {
 
           </ScrollView>
 
-          {/* <WisButtonFloat 
+          <WisButtonFloat 
             children={[
               {
-                text:"按钮1",
+                text:"下发",
                 onPress:(option)=>{
                   // let selectData=this.refs.tableRef.getSelectData();  // 选中数据
                   // console.log(option);
                 }
               }
             ]}
-          />                 */}
+          />                
 
         </View>
     );
