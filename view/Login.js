@@ -1,5 +1,5 @@
 import React from 'react';
-import { window,TouchableOpacity,ToastAndroid,Text, View, StyleSheet } from 'react-native';
+import { DeviceEventEmitter,window,TouchableOpacity,ToastAndroid,Text, View, StyleSheet } from 'react-native';
 import { Icon,Button, Provider, InputItem, List, Toast } from '@ant-design/react-native';
 import { createForm, formShape } from 'rc-form';
 
@@ -55,6 +55,9 @@ class LoginScreenForm extends React.Component {
           let newUserName=value["userName"].trim();
           let newPassword=value["password"].trim();
 
+          // 打开 loding
+          DeviceEventEmitter.emit('globalEmitter_toggle_loding',true);
+
           fetch(WISHttpUtils.getHttpOrigin()+"api-uaa/oauth/user/token",{
             method:'POST',
             headers:{
@@ -70,6 +73,9 @@ class LoginScreenForm extends React.Component {
               }
           })
           .then((json) => {
+              // 关闭 loding
+              DeviceEventEmitter.emit('globalEmitter_toggle_loding',false);
+
               var token=json.data.access_token;
 
               if(json){

@@ -3,7 +3,7 @@ import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {origin} from './origin';     // 服务地址
 
-import {ToastAndroid} from 'react-native';
+import {ToastAndroid,DeviceEventEmitter} from 'react-native';
 
 
 /**
@@ -63,11 +63,18 @@ export default class WISHttpUtils extends Component{
     static post(url,option,callback){
         try {
 
+
             // 模拟 form 数据提交
             var formData = '';
             Object.entries(option["params"]).map((o)=>formData+='&'+o[0]+'='+String(o[1]));
             // console.log(data);
+            
             AsyncStorage.getItem("_token").then((data)=>{
+
+                // open loding
+                DeviceEventEmitter.emit('globalEmitter_toggle_loding',true);
+
+
                 fetch(origin+url,{
                     method:'POST',
                     headers:{
@@ -85,6 +92,9 @@ export default class WISHttpUtils extends Component{
                     }                    
                 })
                 .then((json) => {
+
+                    // 关闭 loding
+                    DeviceEventEmitter.emit('globalEmitter_toggle_loding',false);
 
                     // 提示
                     if(json && json["message"]){

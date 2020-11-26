@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DeviceEventEmitter,TouchableOpacity, View, Text, } from 'react-native';
+import { Dimensions,StyleSheet,ActivityIndicator,DeviceEventEmitter,TouchableOpacity, View, Text, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -34,20 +34,32 @@ const Stack = createStackNavigator();
 
 class App extends Component {
   constructor (props) {
-    super(props)
-    // console.log('BASE_URL', Config)
+    super(props);
+
+    this.state={
+      activityIndicatorVisible: false,    // loding
+    }  
   }
   
-  componentDidMount=async() => {
+  componentDidMount() {
+    let that=this;
+
+    // loding
+    this.listener =DeviceEventEmitter.addListener('globalEmitter_toggle_loding',function(active){
+      that.setState({
+        activityIndicatorVisible:active
+      });
+    });
 
   }
 
-  openDrawer(){
-
+  componentWillUnmount(){
+    this.listener.remove();
   }
 
   render() {
     let that=this;
+    let {activityIndicatorVisible}=this.state;
 
     // 公共头部
     let headOption={
@@ -72,6 +84,15 @@ class App extends Component {
 
     return(
       <Provider>
+        { activityIndicatorVisible ?
+          <View style={{...styles.activityIndicatorStyle,width:Dimensions.get('window').width,height:Dimensions.get('window').height}}>
+            <ActivityIndicator size="large" color="#13c2c2" />
+          </View>
+          :
+          <View></View>
+        }
+
+
 
         <Drawer
           sidebar={<CenterScreen onClose={()=> that.drawer.closeDrawer() } />}
@@ -139,5 +160,15 @@ class App extends Component {
 }
 
 
+const styles = StyleSheet.create({
+  activityIndicatorStyle:{
+    position:"absolute",
+    top:0,
+    left:0,
+    zIndex:999999,
+    justifyContent:'center',
+    backgroundColor:'#dde5dd24'
+  }
+})
 
 export default App;
