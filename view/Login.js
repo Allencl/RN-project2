@@ -4,6 +4,7 @@ import { Icon,Button, Provider, InputItem, List, Toast } from '@ant-design/react
 import { createForm, formShape } from 'rc-form';
 
 import WISHttpUtils from '@wis_component/http';   // http 
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class LoginScreenForm extends React.Component {
@@ -54,9 +55,7 @@ class LoginScreenForm extends React.Component {
           let newUserName=value["userName"].trim();
           let newPassword=value["password"].trim();
 
-
-          // return;
-          fetch("http://182.168.1.132:9900/"+"api-uaa/oauth/user/token",{
+          fetch(WISHttpUtils.getHttpOrigin()+"api-uaa/oauth/user/token",{
             method:'POST',
             headers:{
                 // 'Content-Type': 'application/json;charset=UTF-8',
@@ -120,7 +119,7 @@ class LoginScreenForm extends React.Component {
         } catch (error) {
         } 
       }
-      
+
     });
   }
 

@@ -1,13 +1,10 @@
 import React,{Component} from 'react';
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {origin} from './origin';     // 服务地址
 
 import {ToastAndroid} from 'react-native';
-//const base_url="http://182.168.1.19:8088/";
-//const base_url="http://60.222.227.231:10080/sit/";
-// const base_url=Config.base_url;
-const base_url="http://182.168.1.132:9900/";
+
 
 /**
  * 网络请求的工具类
@@ -19,13 +16,21 @@ export default class WISHttpUtils extends Component{
     }
 
     /**
+     * 获取服务器 地址
+     */
+    static getHttpOrigin(){  
+        return origin;
+    }      
+
+
+    /**
      * 普通的get请求 
      * @param {*} url 地址
      * @param {*} params  参数
      * @param {*} callback  成功后的回调
      */
     static get(url,params,callback){        
-       fetch(base_url+url,{
+       fetch(origin+url,{
         method:'GET',
         body:params
         })
@@ -63,7 +68,7 @@ export default class WISHttpUtils extends Component{
             Object.entries(option["params"]).map((o)=>formData+='&'+o[0]+'='+String(o[1]));
             // console.log(data);
             AsyncStorage.getItem("_token").then((data)=>{
-                fetch(base_url+url,{
+                fetch(origin+url,{
                     method:'POST',
                     headers:{
                         'Content-Type': 'application/x-www-form-urlencoded',
