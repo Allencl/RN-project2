@@ -85,7 +85,16 @@ export default class WISHttpUtils extends Component{
                     body: formData.slice(1)
                 })
                 .then((response) => {
+
+
                     console.log(response);
+                    console.log(response.json());
+                    console.log(111);
+
+
+                    // 关闭 loding
+                    DeviceEventEmitter.emit('globalEmitter_toggle_loding',false);
+
                     // 如果相应码为200 将字符串转换为json对象
                     if(response.ok){
                         return response.json(); 
@@ -93,8 +102,7 @@ export default class WISHttpUtils extends Component{
                 })
                 .then((json) => {
                     console.log(json);
-                    // 关闭 loding
-                    DeviceEventEmitter.emit('globalEmitter_toggle_loding',false);
+                    console.log(333);
 
                     // 提示
                     if(json && json["message"]){

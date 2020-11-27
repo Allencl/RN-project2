@@ -68,13 +68,16 @@ class LoginScreenForm extends React.Component {
             body: "username="+newUserName+"&password="+newPassword+"&lang=zh_CN&j_captcha=1&customKey='toName=home'"
           })
           .then((response) => {
+
+              // 关闭 loding
+              DeviceEventEmitter.emit('globalEmitter_toggle_loding',false);
+                          
               if(response.ok){
                 return response.json();
               }
           })
           .then((json) => {
-              // 关闭 loding
-              DeviceEventEmitter.emit('globalEmitter_toggle_loding',false);
+
 
               var token=json.data.access_token;
 
